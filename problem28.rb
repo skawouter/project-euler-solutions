@@ -1,55 +1,55 @@
 #problem 28
-@@howbig = 5
-@@spiral = Array.new(@@howbig)
-@@spiral.each do |v|
-	v= Array.new(@@howbig)
-	v.fill(0)
+big = 1001
+arr = []
+big.times do |k|
+	arr << Array.new(big)
+	arr[k].fill(0)
 end
-@@currnumber = 1
-@@itter = 1
-
-def fill_spiral(startpos)
-	x,y = startpos,startpos
-	setspiral(x,y)
-	x+=1
-	setspiral(x,y)	
-	@@itter.times do 
-		y+=1
-		setspiral(x,y)
-	end
-	(@@itter+1).times do 
-		x-=1
-		setspiral(x,y)
-	end
-	(@@itter+1).times do 
-		y+=1
-		setspiral(x,y)
-	end
-	(@@itter+1).times do 
-		y+=1
-		setspiral(x,y)
-	end
-	@@itter += 2
-end
-def setspiral(x,y)
-	printspiral
-	@@spiral[x-1][y-1] = @@currnumber
-	
-	@@currnumber += 1
-	printspiral
-	raise "test"
-end
-def printspiral()
-	output = ""
-	@@howbig.times do |n|
-		@@howbig.times do |v|
-			puts n.to_s + ", " + v.to_s
-			output = output  + @@spiral[n][v].to_s
+x=y= (big/2)
+arr[y][x]=1
+value = 1
+count = 1
+dotime = 1
+first = false
+nextdo = 1 # 1= right, 2= under, 3=left,4=up
+while (x < big and y < big)
+	while dotime > 0
+		#puts "x,y = " + x.to_s + "," + y.to_s
+		#puts arr[y][x].to_s
+		case nextdo
+			when 1
+				x+=1				
+			when 2
+				y+=1
+			when 3
+				x-=1
+			when 4
+				y-=1
 		end
-		output += "\n"
+		dotime -=1
+		value += 1
+		arr[y][x] = value
 	end
-	puts output.to_s
+	nextdo +=1 
+	nextdo = 1 if nextdo > 4 
+	count += 1 if first
+	first = !first
+	dotime = count	
 end
-fill_spiral(3)
-printspiral
-
+# arr.each do |v|
+	# puts v.join(',')
+# end
+sum = 0
+for j in (0..1000)
+	for s in (0..1000)
+		sum+= arr[j][s]
+	end
+end
+for j in (0..1000)
+	for s in (100..0)
+		sum+= arr[j][s]
+	end
+end
+puts sum.to_s
+puts arr[0][0].to_s
+puts arr[1000][1000].to_s
