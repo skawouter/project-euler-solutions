@@ -18,37 +18,48 @@
 row = 0
 col = 0
 def docalc(row,col,doright)	
-	puts "#{row},#{col}"
+	#puts "#{row},#{col}"
 	if row < 14 and col < 14			
 		if doright
-			puts "docalc(#{row+1},#{col},false) and docalc(#{row+1},#{col+1},true)"
+	#		puts "docalc(#{row+1},#{col},false) and docalc(#{row+1},#{col+1},true)"
 			return @v[row+1][col].to_i + @v[row+1][col+1].to_i + docalc(row+1,col,false) + docalc(row+1,col+1,true)
 		else
-			puts "docalc(#{row+1},#{col},false)"
+	#		puts "docalc(#{row+1},#{col},false)"
 			return @v[row+1][col].to_i  + docalc(row+1,col,false) 
 		end
 	else 
-		return @v[row][col].to_i
+		return 0
 	end
 end
- docalc(13,8,true)
- docalc(13,9,true)
-# sum = 0
-# while row <14
-	# sum += @v[row][col].to_i
+ #docalc(0,0,true)
+ 
+sum = 0
+while row <13
+	sum += @v[row][col].to_i
 
-	# puts "#{row},#{col}"
-	# puts @v[row][col].to_s	
-	# if docalc(row+1,col,true) > docalc(row+1,col+1,true)
-		# row +=1 
-	# elsif docalc(row+1,col,true) < docalc(row+1,col+1,true)
-		# row +=1
-		# col +=1
-	# else 
-		# row +=1
-	# end
-# end
-	# puts "#{row},#{col}"
-	# puts @v[row][col].to_s
+	puts "#{row},#{col}"
+	puts @v[row][col].to_s
+	if docalc(row+1,col,true) > docalc(row+1,col+1,true)
+		row +=1 
+	elsif docalc(row+1,col,true) < docalc(row+1,col+1,true)
+		row +=1
+		col +=1
+	else 
+		row +=1
+	end
+end
+	puts "#{row},#{col}"
+	puts @v[row][col].to_s
+if row+1 == 14 or col+1 == 14
+	if @v[row+1][col] > @v[row+1][col+1]
+		puts "#{row+1},#{col}"
+		puts @v[row+1][col].to_s
+		sum+= @v[row+1][col].to_i
+	else
+		puts "#{row+1},#{col+1}"
+		puts @v[row+1][col+1].to_s
+		sum += @v[row+1][col+1].to_i
+	end
+end
 	
- # puts (sum + @v[row][col].to_i).to_s
+ puts (sum + @v[row][col].to_i).to_s
