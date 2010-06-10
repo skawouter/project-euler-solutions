@@ -1,0 +1,6 @@
+sum = 0
+ for j in 1..1000 do
+ sum += (j**j)
+ end
+
+ puts sum

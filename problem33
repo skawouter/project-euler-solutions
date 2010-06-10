@@ -1,0 +1,9 @@
+#problem 33
+def works?(up,down)
+	if (up.to_s[0].to_f / down.to_s[1].to_f) == (up.to_f / down.to_f)
+		return true
+	end
+end
+
+for j in 10..100.to_a do |v|
+	if j.to_s[0].to_f / 
